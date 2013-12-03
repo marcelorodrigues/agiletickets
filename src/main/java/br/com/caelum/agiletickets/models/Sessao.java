@@ -106,6 +106,6 @@ public class Sessao {
 		int sobraram = getIngressosDisponiveis() - numeroDeIngressos;
         boolean naoTemEspaco = sobraram <= 0;
 
-        return !naoTemEspaco;
+        return naoTemEspaco;
 	}
 }
