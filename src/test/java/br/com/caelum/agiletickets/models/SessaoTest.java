@@ -31,6 +31,7 @@ public class SessaoTest {
 		Assert.assertEquals(2, sessao.getIngressosDisponiveis().intValue());
 	}
 	
+
 	@Test
 	public void deveReservar7IngressosSeHa7Vagas(){
 		Sessao sessao = new Sessao();
@@ -39,4 +40,5 @@ public class SessaoTest {
 		
 		Assert.assertTrue(sessao.podeReservar(7));
 	}
+
 }
