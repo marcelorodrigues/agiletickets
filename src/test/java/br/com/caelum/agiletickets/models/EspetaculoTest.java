@@ -111,7 +111,7 @@ public class EspetaculoTest {
 	@Test
 	public void deveCriarCincoSessoesDiarias() {
 		LocalDate dataInicio = new LocalDate();
-		LocalDate dataFinal = new LocalDate().plusDays(5);		
+		LocalDate dataFinal = new LocalDate().plusDays(6);		
 		LocalTime horario = new LocalTime(21,00);
 		Espetaculo espetaculo = new Espetaculo();
 		List<Sessao> sessoes = espetaculo.criaSessoes(dataInicio, dataFinal, horario, Periodicidade.DIARIA);
