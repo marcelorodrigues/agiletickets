@@ -35,7 +35,7 @@ public class SessaoTest {
 	public void deveReservar7IngressosSeHa7Vagas(){
 		Sessao sessao = new Sessao();
 		sessao.setTotalIngressos(7);
-		sessao.reserva(7);
+		//sessao.reserva(7);
 		
 		Assert.assertTrue(sessao.podeReservar(7));
 	}
