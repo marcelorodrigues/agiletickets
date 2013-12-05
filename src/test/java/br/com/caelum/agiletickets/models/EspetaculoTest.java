@@ -11,8 +11,6 @@ import org.joda.time.LocalTime;
 import org.junit.Assert;
 import org.junit.Test;
 
-import sun.util.resources.LocaleData;
-
 public class EspetaculoTest {
 
 	@Test
