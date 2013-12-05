@@ -107,9 +107,13 @@ public class Espetaculo {
 		
 		if(Periodicidade.DIARIA.equals(periodicidade)){
 			int diferencaDeDias = Days.daysBetween(inicio, fim).getDays();
-			for(int i=0;i<diferencaDeDias+1;i++){
+			if(diferencaDeDias==0){
+				diferencaDeDias++;
+			}
+			for(int i=0;i<diferencaDeDias;i++){
 				Sessao sessao = new Sessao();
 				sessao.setInicio(inicio.plusDays(i).toDateTime(horario));
+				sessao.setEspetaculo(this);
 				lista.add(sessao);
 			}
 		}
@@ -118,6 +122,7 @@ public class Espetaculo {
 			for(int i=0;i<diferencaDeSemanas;i++){
 				Sessao sessao = new Sessao();
 				sessao.setInicio(inicio.plusWeeks(i).toDateTime(horario));
+				sessao.setEspetaculo(this);
 				lista.add(sessao);
 			}
 		}
