@@ -34,7 +34,7 @@ public class PreencheBanco {
 			Sessao sessao = criaSessao(espetaculo, i);
 			manager.persist(sessao);
 		}
-		//manager.persist(estabelecimento);
+		/*//manager.persist(estabelecimento);
 		manager.persist(espetaculo);
 		
 		for (int i = 0; i < 10; i++) {
@@ -46,7 +46,7 @@ public class PreencheBanco {
 			sessao.setIngressosReservados(10 - i);
 			sessao.setPreco(new BigDecimal("12.34"));
 			manager.persist(sessao);
-		}
+		}*/
 	}
 
 	private static EntityManager getManager() {
