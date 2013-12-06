@@ -1,5 +1,7 @@
 package br.com.caelum.agiletickets;
 
+import java.math.BigDecimal;
+
 import javax.persistence.EntityManager;
 
 import org.joda.time.DateTime;
@@ -32,6 +34,19 @@ public class PreencheBanco {
 			Sessao sessao = criaSessao(espetaculo, i);
 			manager.persist(sessao);
 		}
+		//manager.persist(estabelecimento);
+		manager.persist(espetaculo);
+		
+		for (int i = 0; i < 10; i++) {
+			Sessao sessao = new Sessao();
+			sessao.setEspetaculo(espetaculo);
+			sessao.setInicio(new DateTime().plusDays(7+i));
+			sessao.setDuracaoEmMinutos(60 * 3);
+			sessao.setTotalIngressos(10);
+			sessao.setIngressosReservados(10 - i);
+			sessao.setPreco(new BigDecimal("12.34"));
+			manager.persist(sessao);
+		}
 	}
 
 	private static EntityManager getManager() {
@@ -50,6 +65,7 @@ public class PreencheBanco {
 		sessao.setDuracaoEmMinutos(60 * 3);
 		sessao.setTotalIngressos(10);
 		sessao.setIngressosReservados(10 - i);
+		
 		return sessao;
 	}
 
@@ -65,6 +81,7 @@ public class PreencheBanco {
 		Estabelecimento estabelecimento = new Estabelecimento();
 		estabelecimento.setNome("Casa de shows");
 		estabelecimento.setEndereco("Rua dos Silveiras, 12345");
+		
 		return estabelecimento;
 	}
 
@@ -72,5 +89,6 @@ public class PreencheBanco {
 		manager.createQuery("delete from Sessao").executeUpdate();
 		manager.createQuery("delete from Espetaculo").executeUpdate();
 		manager.createQuery("delete from Estabelecimento").executeUpdate();
+		
 	}
 }
