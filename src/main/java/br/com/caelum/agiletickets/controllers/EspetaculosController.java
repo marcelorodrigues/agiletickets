@@ -81,14 +81,16 @@ public class EspetaculosController {
 	}
 
 	@Post @Path("/sessao/{sessaoId}/reserva")
-	public void reserva(Long sessaoId, final Integer quantidade) {
+	public void reserva(Long sessaoId, Integer quantidade,Integer quantidadeMeia) {
+		quantidade = quantidade == null ? 0:quantidade;
+		quantidadeMeia = quantidadeMeia == null ? 0:quantidadeMeia;
 		Sessao sessao = agenda.sessao(sessaoId);
 		if (sessao == null) {
 			result.notFound();
-			//return;
+			return;
 		}
 
-		if (quantidade < 1) {
+		if (quantidade+quantidadeMeia < 1) {
 			validator.add(new ValidationMessage("Voce deve escolher um lugar ou mais", ""));
 		}
 
@@ -96,17 +98,23 @@ public class EspetaculosController {
 			validator.add(new ValidationMessage("Nao existem ingressos dispon√≠veis", ""));
 		}
 
-		verificaErro(quantidade < 1, "Voce deve escolher um lugar ou mais");		
-		verificaErro(!sessao.podeReservar(quantidade), "Nao existem ingressos disponíveis");
+		verificaErro(quantidade+quantidadeMeia < 1, "Voce deve escolher um lugar ou mais");		
+		verificaErro(!sessao.podeReservar(quantidade+quantidadeMeia), "Nao existem ingressos disponíveis");
 
 		// em caso de erro, redireciona para a lista de sessao
 		validator.onErrorRedirectTo(this).sessao(sessao.getId());
 
-		sessao.reserva(quantidade);
+		sessao.reserva(quantidade+quantidadeMeia);
 
-		BigDecimal precoTotal = sessao.getPreco().multiply(BigDecimal.valueOf(quantidade));
+		BigDecimal precoTotalInteira = new BigDecimal(0);
+		if(quantidade>0)
+		precoTotalInteira= sessao.getPreco().multiply(BigDecimal.valueOf(quantidade));
+		
+		BigDecimal precoTotalMeia = new BigDecimal(0);
+		if(quantidadeMeia>0)
+		precoTotalMeia= sessao.getPreco().multiply(BigDecimal.valueOf(quantidadeMeia)).multiply(new BigDecimal(0.5));
 
-		result.include("message", "Sessao reservada com sucesso por " + CURRENCY.format(precoTotal));
+		result.include("message", "Sessao reservada com sucesso por " + CURRENCY.format(precoTotalInteira.add(precoTotalMeia)));
 
 		result.redirectTo(IndexController.class).index();
 	}

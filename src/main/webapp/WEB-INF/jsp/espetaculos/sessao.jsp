@@ -18,11 +18,15 @@
 		<c:if test="${sessao.ingressosDisponiveis gt 0}">
 			<form action="/sessao/${sessao.id}/reserva" method="post">
 				<h3>Reservar ingresso</h3>
-				<label for="qtde">Quantidade</label>
+				<label for="qtde">Inteira:</label>
 				<input id="qtde" name="quantidade"/>
+				
+				<label for="qtdeMeia">Meia:</label>
+				<input id="qtdeMeia" name="quantidadeMeia"/>
 				
 				<input type="submit" value="Reservar"/>
 			</form>
+			
 		</c:if>
 	</body>
 

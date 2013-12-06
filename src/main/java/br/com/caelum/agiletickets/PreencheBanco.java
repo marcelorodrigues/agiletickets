@@ -30,12 +30,12 @@ public class PreencheBanco {
 	}
 
 	private static void criaSessoes(EntityManager manager, Espetaculo espetaculo) {
-		for (int i = 0; i < 10; i++) {
+		/*for (int i = 0; i < 10; i++) {
 			Sessao sessao = criaSessao(espetaculo, i);
 			manager.persist(sessao);
-		}
+		}*/
 		//manager.persist(estabelecimento);
-		manager.persist(espetaculo);
+		//manager.persist(espetaculo);
 		
 		for (int i = 0; i < 10; i++) {
 			Sessao sessao = new Sessao();
